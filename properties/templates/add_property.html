@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add New Property Listing{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto bg-white shadow-2xl rounded-2xl overflow-hidden">
+        <header class="bg-gradient-to-r from-amber-600 to-amber-800 text-white py-6 px-6">
+            <h1 class="text-3xl md:text-4xl font-bold text-center tracking-wide" aria-level="1">
+                Add Property Listing
+            </h1>
+        </header>
+
+        <form method="post" enctype="multipart/form-data" class="p-6 md:p-10 space-y-6" aria-label="Property Listing Form">
+            {% csrf_token %}
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Property Details Column -->
+                <div class="space-y-6 md:col-span-2">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Title Field -->
+                        <div class="form-group">
+                            <label for="{{ property_form.title.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Property Title
+                            </label>
+                            {{ property_form.title }}
+                            {% if property_form.title.errors %}
+                                <p class="mt-1 text-xs text-red-600" role="alert">{{ property_form.title.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Location Field -->
+                        <div class="form-group">
+                            <label for="{{ property_form.location.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Location
+                            </label>
+                            {{ property_form.location }}
+                            {% if property_form.location.errors %}
+                                <p class="mt-1 text-xs text-red-600" role="alert">{{ property_form.location.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Property Type Field -->
+                        <div class="form-group">
+                            <label for="{{ property_form.type.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Property Type
+                            </label>
+                            {{ property_form.type }}
+                            {% if property_form.type.errors %}
+                                <p class="mt-1 text-xs text-red-600" role="alert">{{ property_form.type.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Status Field -->
+                        <div class="form-group">
+                            <label for="{{ property_form.status.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Property Status
+                            </label>
+                            {{ property_form.status }}
+                            {% if property_form.status.errors %}
+                                <p class="mt-1 text-xs text-red-600" role="alert">{{ property_form.status.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Description Field -->
+                    <div class="form-group">
+                        <label for="{{ property_form.description.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                            Property Description
+                        </label>
+                        {{ property_form.description }}
+                        {% if property_form.description.errors %}
+                            <p class="mt-1 text-xs text-red-600" role="alert">{{ property_form.description.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-2 gap-6">
+                        <!-- Price Field -->
+                        <div class="form-group">
+                            <label for="{{ property_form.price.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Price
+                            </label>
+                            {{ property_form.price }}
+                            {% if property_form.price.errors %}
+                                <p class="mt-1 text-xs text-red-600" role="alert">{{ property_form.price.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <!-- Square Footage Field -->
+                        <div class="form-group">
+                            <label for="{{ property_form.square_footage.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Square Footage
+                            </label>
+                            {{ property_form.square_footage }}
+                            {% if property_form.square_footage.errors %}
+                                <p class="mt-1 text-xs text-red-600" role="alert">{{ property_form.square_footage.errors.0 }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Date Closed Field -->
+                    <div class="form-group">
+                        <label for="{{ property_form.date_closed.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                            Date Closed
+                        </label>
+                        {{ property_form.date_closed }}
+                        {% if property_form.date_closed.errors %}
+                            <p class="mt-1 text-xs text-red-600" role="alert">{{ property_form.date_closed.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Media Upload Column -->
+                <div class="space-y-6 bg-gray-50 p-6 rounded-lg">
+                    <div class="media-upload">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">
+                            <i class="fas fa-images mr-2"></i>Upload Images
+                        </h3>
+                        <div class="mb-4">
+                            <label for="{{ image_form.image.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Property Images
+                            </label>
+                            <input 
+                                type="file" 
+                                name="image" 
+                                id="{{ image_form.image.id_for_label }}" 
+                                multiple 
+                                accept=".jpg,.jpeg,.png,.webp" 
+                                class="form-file"
+                            >
+                            <small class="text-gray-500 block mt-2">
+                                Accepted formats: .jpg, .jpeg, .png, .webp
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <div class="media-upload">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">
+                            <i class="fas fa-video mr-2"></i>Upload Videos
+                        </h3>
+                        <div>
+                            <label for="{{ video_form.video.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                Property Videos
+                            </label>
+                            <input 
+                                type="file" 
+                                name="video" 
+                                id="{{ video_form.video.id_for_label }}" 
+                                multiple 
+                                accept=".mp4,.mov" 
+                                class="form-file"
+                            >
+                            <small class="text-gray-500 block mt-2">
+                                Accepted formats: .mp4, .mov
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center mt-8">
+                <button 
+                    type="submit" 
+                    class="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white font-semibold rounded-full shadow-md hover:from-amber-700 hover:to-amber-800 transition duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50"
+                    aria-label="Submit Property Listing"
+                >
+                    Submit Property Listing
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

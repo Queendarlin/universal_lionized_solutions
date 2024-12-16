@@ -1,0 +1,136 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Universal Lionized Solutions{% endblock %}</title>
+    {% tailwind_css %}
+    <style>
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            z-index: 1;
+        }        
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- Navigation Bar -->
+    <nav id="navbar" class="container mx-auto p-6">
+        <div class="flex items-center justify-between">
+            <!-- Logo Section -->
+            <div class="flex items-center space-x-2">
+                <a href="{% url 'home' %}" aria-label="Company Logo">
+                  <img src="{% static 'images/logo.png' %}" alt="Company Logo" class="w-12 h-12 object-contain" />
+                </a>
+              </div>
+
+            <!-- Navigation Links-->
+            <div class="hidden space-x-6 md:flex">
+                <a href="#about" class="hover:text-amber-600">About</a>
+                <a href="#services" class="hover:text-amber-600">Services</a>
+                <a href="{% url 'property_list' %}" class="hover:text-amber-600">Properties</a>
+                <a href="#features" class="hover:text-amber-600">Features</a>
+                <a href="#payment" class="hover:text-amber-600">Payment</a>
+                <a href="#contact" class="hover:text-amber-600">Contact</a>
+            </div>
+
+            <div>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" id="logout-link" class="hover:text-amber-600">Logout</a>
+                {% else %}
+                    <a href="{% url 'register' %}" class="hidden w-full md:w-auto px-8 py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white font-semibold rounded-full shadow-md hover:from-amber-700 hover:to-amber-800 transition duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50 md:block">
+                Get Started
+            </a>
+            {% endif %}
+        </div>   
+            <!-- Hamburger Icon (visible on small screens) -->
+            <button id="hamburger-btn" class="block md:hidden focus:outline-none" onclick="toggleMenu()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden flex-col space-y-4 mt-4">
+            <a href="#about" class="block text-center hover:text-red-400">About</a>
+            <a href="#services" class="block text-center hover:text-red-400">Services</a>
+            <a href="{% url 'property_list' %}" class="block text-center hover:text-red-400">Properties</a>
+            <a href="#features" class="block text-center hover:text-red-400">Features</a>
+            <a href="#payment" class="block text-center hover:text-red-400">Payment</a>
+            <a href="#contact" class="block text-center hover:text-red-400">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto pt-20">
+        {% if messages %}
+        <div class="relative top-4 space-y-4 z-50">
+            {% for message in messages %}
+            <div class="flex items-center justify-between p-4 rounded-md shadow-md text-white
+                {% if message.tags == 'success' %}bg-green-500{% elif message.tags == 'error' %}bg-red-500{% elif message.tags == 'warning' %}bg-yellow-500{% else %}bg-blue-500{% endif %}"
+                role="alert">
+                <span>{{ message }}</span>
+                <button type="button" class="ml-4 text-xl font-bold leading-none focus:outline-none" onclick="this.parentElement.remove()">×</button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% block content %}
+        <!-- Content goes here -->
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-950">
+        <div class="container flex flex-col-reverse justify-between px-6 py-10 mx-auto space-y-8 md:flex-row md:space-y-0">
+            <div class="flex flex-col-reverse items-center justify-between space-y-12 md:flex-col md:space-y-0 md:items-start">
+                <div class="mx-auto my-6 text-center text-white md:hidden">
+                    Copyright &copy; 2022, All Rights Reserved
+                </div>
+                <div class="flex justify-center space-x-4">
+                    <a href="https://www.facebook.com/p/universal-lionized-solutions-nigeria-61567458512747/" target="_blank"><img src="{% static 'images/icon-facebook.svg' %}" alt="facebook icon" class="h-8" /></a>
+                    <a href="https://www.instagram.com/universal_lionized_solutions/profilecard/" target="_blank"><img src="{% static 'images/icon-instagram.svg' %}" alt="instagram icon" class="h-8" /></a>
+                    <a href="https://www.youtube.com/@universalestate-wi4ze" target="_blank">
+                        <img src="{% static 'images/icon-youtube.svg' %}" alt="" class="h-8 bg-red-500" />
+                      </a>
+                </div>
+            </div>
+            <div class="flex justify-around space-x-32">
+                <div class="flex flex-col space-y-3 text-white">
+                    <a href="{% url 'home' %}" class="hover:text-red-300">Home</a>
+                    <a href="#about" class="hover:text-red-300">About Us</a>
+                    <a href="#services" class="hover:text-red-300">Services</a>
+                </div>
+                <div class="flex flex-col space-y-3 text-white">
+                    <a href="{% url 'property_list' %}" class="hover:text-red-300">Properties</a>
+                    <a href="#contact" class="hover:text-red-300">Contact</a>
+                    <a href="#" class="hover:text-red-300">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="flex flex-col justify-between">
+                <a href="https://wa.me/+2348057343197" target="_blank" class="px-6 py-2 text-center text-white bg-gradient-to-r from-amber-600 to-amber-700 font-semibold rounded-full shadow-md hover:from-amber-700 hover:to-amber-800 transition duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50">Chat with us on WhatsApp</a>
+                <div class="hidden text-white md:block">
+                    Copyright &copy; 2022, All Rights Reserved
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript function to toggle mobile menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../static/scripts/logout.js"></script>
+</body>
+</html>

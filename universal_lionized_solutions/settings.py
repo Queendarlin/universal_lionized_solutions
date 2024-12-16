@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'tailwind',
     'django_browser_reload',
     'django.contrib.humanize',
+    'crispy_forms',
+    'crispy_tailwind',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -52,7 +54,7 @@ INTERNAL_IPS = [
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 # Custom user model configuration
-# AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -100,7 +102,7 @@ DATABASES = {
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('DB_HOST'),
-        'PORT': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
     }
 }
 
