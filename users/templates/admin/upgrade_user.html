@@ -1,0 +1,15 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+<h1>Upgrade Users</h1>
+<p>You are upgrading the roles for the following users:</p>
+<ul>
+    {% for user in users %}
+    <li>{{ user.username }} (Current Role: {{ user.role }})</li>
+    {% endfor %}
+</ul>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button">Upgrade</button>
+</form>
+{% endblock %}

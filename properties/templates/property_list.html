@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Property Listings{% endblock %}
+
+{% block content %}
+<div class="min-h-screen py-12">
+    <div class="container mx-auto px-4">
+        <h1 class="text-4xl font-semibold text-amber-700 text-center mb-8">Available Properties</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for property in properties %}
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform transform hover:scale-105">
+                <!-- Dynamic image rendering: show the first image if it exists -->
+                {% if property.images.first %}
+                    <img src="{{ property.images.first.image.url }}" alt="{{ property.title }}" class="w-full h-56 object-cover">
+                {% else %}
+                    <div class="w-full h-56 bg-gray-200 flex items-center justify-center text-gray-500">
+                        No Image Available
+                    </div>
+                {% endif %}
+
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold text-gray-900">{{ property.title }}</h2>
+                    <div class="flex items-start gap-2 mt-4">
+                            <svg class="w-6 h-6 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <p class="text-lg text-gray-600">{{ property.location }}</p>
+                        </div>
+                    <p class="text-amber-700 font-semibold text-xl mt-2">#{{ property.price|intcomma}}</p>
+                    
+                    <!-- CTA Button -->
+                    <a href="{% url 'property_detail' property.id %}" class="block mt-4 text-center text-white text-lg bg-amber-700 py-2 rounded-full hover:bg-amber-600 shadow-md transition duration-200">
+                        View Details
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

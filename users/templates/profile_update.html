@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mx-auto mt-8 px-4 pt-5 pb-12 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-8">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6">Update Profile</h2>
+
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+            
+            <!-- Username -->
+            <div class="form-group">
+                <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" name="username" id="username" value="{{ form.username.value }}" class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500" />
+                {% if form.username.errors %}
+                    <p class="text-red-500 text-sm">{{ form.username.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- First Name -->
+            <div class="form-group">
+                <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
+                <input type="text" name="first_name" id="first_name" value="{{ form.first_name.value }}" class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500" />
+                {% if form.first_name.errors %}
+                    <p class="text-red-500 text-sm">{{ form.first_name.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Last Name -->
+            <div class="form-group">
+                <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
+                <input type="text" name="last_name" id="last_name" value="{{ form.last_name.value }}" class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500" />
+                {% if form.last_name.errors %}
+                    <p class="text-red-500 text-sm">{{ form.last_name.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" name="email" id="email" value="{{ form.email.value }}" class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500" />
+                {% if form.email.errors %}
+                    <p class="text-red-500 text-sm">{{ form.email.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Current Password -->
+            <div class="form-group">
+                <label for="current_password" class="block text-sm font-medium text-gray-700">Current Password</label>
+                <input type="password" name="current_password" id="current_password" autocomplete="off" required class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500" />
+                {% if form.current_password.errors %}
+                    <p class="text-red-500 text-sm">{{ form.current_password.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- New Password -->
+            <div class="form-group">
+                <label for="new_password" class="block text-sm font-medium text-gray-700">New Password</label>
+                <input type="password" name="new_password" id="new_password" class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500" />
+                {% if form.new_password.errors %}
+                    <p class="text-red-500 text-sm">{{ form.new_password.errors }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Confirm New Password -->
+            <div class="form-group">
+                <label for="new_password_confirm" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
+                <input type="password" name="new_password_confirm" id="new_password_confirm" class="mt-2 p-3 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500" />
+                {% if form.new_password_confirm.errors %}
+                    <p class="text-red-500 text-sm">{{ form.new_password_confirm.errors }}</p>
+                {% endif %}
+            </div>
+
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit" class="w-full py-3 bg-amber-700 text-white font-semibold rounded-full shadow-lg hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50">
+                    Update Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

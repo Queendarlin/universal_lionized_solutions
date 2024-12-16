@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}{{ property.title }} - Property Details{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-200 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- Breadcrumb -->
+        <nav class="mb-8" aria-label="Breadcrumb">
+            <ol class="flex items-center space-x-2 text-gray-600">
+                <li><a href="{% url 'home' %}" class="hover:text-amber-700 transition-colors">Home</a></li>
+                <li class="flex items-center">
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1"/>
+                    </svg>
+                    <a href="{% url 'property_list' %}">
+                    <span class="ml-2">Available Properties</span>
+                </a>
+                </li>
+                <li class="flex items-center">
+                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+                    </svg>
+                    <span class="ml-2">Property Details</span>
+                </li>
+            </ol>
+        </nav>
+
+        <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
+            <!-- Property Content Grid -->
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8">
+                <!-- Images Section -->
+                <div class="lg:col-span-1">
+                        <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+                            {% for image in property.images.all %}
+                            <img 
+                                src="{{ image.image.url }}" 
+                                alt="Photo {{ forloop.counter }} of {{ property.title }}"
+                                class="object-cover w-full h-full transition-opacity duration-500"
+                                x-show="activeSlide === {{ forloop.counter0 }}"
+                                loading="lazy"
+                            >
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Videos Section -->
+                    {% if property.videos.exists %}
+                    <div class="px-2 rounded-xl shadow-2xl overflow-hidden">
+                        <div class="space-y-4">
+                            {% for video in property.videos.all %}
+                            <div class="aspect-w-16 aspect-h-9">
+                                <video 
+                                    controls 
+                                    class="w-full rounded-lg"
+                                >
+                                    <source src="{{ video.video.url }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Details Section -->
+                <div class="lg:col-span-1 p-6 lg:p-8">
+                    <h1 class="text-3xl font-semibold text-gray-900 mb-4">{{ property.title }}</h1>
+
+                    <div class="prose max-w-none">
+                      <h2 class="text-xl font-semibold text-gray-900 mb-3">Property Type</h2>
+                      <p class="text-gray-600 whitespace-pre-line">{{ property.get_type_display }}</p>
+                    </p>
+                    </div>
+                    
+                    <div class="text-sm font-medium text-white mb-6">
+                      <span class="bg-red-500">{{ property.get_status_display }}</span>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Price -->
+                        <div class="flex items-baseline">
+                            <span class="text-4xl font-bold text-amber-700">
+                                #{{ property.price|intcomma }}
+                            </span>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="flex items-start gap-2">
+                            <svg class="w-6 h-6 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <p class="text-lg text-gray-600">{{ property.location }}</p>
+                        </div>
+
+                        <!-- Square Footage -->
+                        {% if property.square_footage %}
+                        <div class="flex items-start gap-2">
+                            <svg class="w-6 h-6 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                            </svg>
+                            <p class="text-lg text-gray-600">{{ property.square_footage }} sq ft</p>
+                        </div>
+                        {% endif %}
+
+                        <!-- Description -->
+                        <div class="prose max-w-none">
+                            <h2 class="text-xl font-semibold text-gray-900 mb-3">Description</h2>
+                            <p class="text-gray-600 whitespace-pre-line">{{ property.description }}</p>
+                        </div>
+
+                        <!-- Additional Details -->
+                        <div class="border-t pt-6 mt-8">
+                            <dl class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500">Listed Date</dt>
+                                    <dd class="text-base text-gray-900">{{ property.created_at|date:"F j, Y" }}</dd>
+                                </div>
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500">Last Updated</dt>
+                                    <dd class="text-base text-gray-900">{{ property.updated_at|date:"F j, Y" }}</dd>
+                                </div>
+                                {% if property.date_closed %}
+                                <div>
+                                    <dt class="text-sm font-medium text-gray-500">Date Closed</dt>
+                                    <dd class="text-base text-gray-900">{{ property.date_closed|date:"F j, Y" }}</dd>
+                                </div>
+                                {% endif %}
+                            </dl>
+                        </div>
+
+                        <!-- Contact Button -->
+                        <div class="mt-8">
+                            <a href="https://wa.me/+2348057343197" target="_blank" class="w-full px-6 py-2 text-center text-white font-semibold shadow-md rounded-full bg-amber-700 text-md hover:bg-amber-600 focus:ring-2 focus-ring-amber-500 focus:ring-offset-2 transition-colors">Contact Us Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

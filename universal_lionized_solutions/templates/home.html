@@ -1,0 +1,207 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home - Universal Lionized Solutions{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="hero">
+    <div
+      class="container flex flex-col-reverse items-center px-6 mx-auto mt-10 space-y-0 md:space-y-0 md:flex-row"
+    >
+      <div class="flex flex-col mb-32 space-y-12 md:w-1/2">
+        <h1
+          class="max-w-md text-3xl text-center md:text-5xl md:text-left"
+        >
+        Find Your Dream Property with <br> Universal Lionized Solutions
+        </h1>
+        <p class="max-w-sm text-center text-gray-800 md:text-left">
+            Discover luxury homes, lands, commercial spaces, and beautiful landscapes tailored to your lifestyle. Experience the elegance of real estate with a trusted partner.
+        </p>
+        <div class="flex justify-center md:justify-start">
+          
+          <a
+            href="{% url 'register' %}"
+            class="w-full md:w-auto px-8 py-3 mx-6 bg-gradient-to-r from-amber-600 to-amber-700 text-white font-semibold rounded-full shadow-md hover:from-amber-700 hover:to-amber-800 transition duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50"
+            >Get Started</a
+          >
+          <a
+            href="{% url 'login' %}"
+            class="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white font-semibold rounded-full shadow-md hover:from-amber-700 hover:to-amber-800 transition duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50"
+            >Login</a
+          >
+        </div>
+      </div>
+      <div class="md:w-1/2">
+        <img src="static/images/hero-image.jpg"alt="" class="rounded-lg w-full h-auto object-cover" />
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="bg-white py-12 px-6 lg:py-20">
+    <div class="container mx-auto lg:flex lg:items-center lg:space-x-8">
+        <!-- Image Section (Visible beside the text on large screens) -->
+        <div class="lg:w-1/2">
+          <img 
+            src="{% static 'images/about-us.jpg' %}" 
+            alt="Team at Universal Lionized Solutions" 
+            class="rounded-lg w-full h-auto object-cover"
+          />
+        </div>
+    
+        <!-- Text Content Section -->
+        <div class="lg:w-1/2 text-center lg:text-left mt-8 lg:mt-0">
+          <!-- Section Heading -->
+          <h2 class="text-4xl text-center text-amber-700">About Us</h2>
+          <p class="mt-4 text-gray-600 max-w-xl mx-auto lg:mx-0">
+            Universal Lionized Solutions is a trusted name in luxury real estate and land investments, dedicated to providing
+            high-quality properties and land that exceed client expectations.
+          </p>
+          <p class="mt-4 text-gray-600 max-w-xl mx-auto lg:mx-0">
+            Our company is built on the values of quality, transparency, and customer satisfaction, ensuring that each
+            investment is a step towards achieving your dreams.
+          </p>
+        </div>
+    </div>
+  
+    <div class="container mx-auto mt-10 lg:flex lg:space-x-12">
+      <!-- Mission Statement and Values -->
+      <div class="lg:w-1/2">
+        <h3 class="text-3xl text-center text-amber-700">Our Mission</h3>
+        <p class="mt-4 text-gray-600 leading-relaxed">
+          Our mission is to build strong client relationships through integrity, transparency, and a commitment to delivering 
+          properties of the highest quality. At Universal Lionized Solutions, we strive to make every client’s dream a reality, 
+          providing exceptional service and guidance throughout their investment journey.
+        </p>
+
+        <h3 class="mt-8 text-3xl text-center text-amber-700">Our Values</h3>
+        <ul class="mt-4 text-gray-600 list-disc list-inside">
+          <li>Quality – Ensuring every property meets our strict standards of excellence.</li>
+          <li>Transparency – Providing clear, honest guidance at every step.</li>
+          <li>Customer Satisfaction – Prioritizing the needs and goals of our clients.</li>
+        </ul>
+      </div>
+
+      <div class="lg:w-1/2 mt-10 lg:mt-0">
+        <div class="lg:w-full">
+            <img 
+              src="{% static 'images/our-teams.jpg' %}" 
+              alt="Team at Universal Lionized Solutions" 
+              class="rounded-lg w-full h-auto object-cover"
+            />
+          </div>
+      </div>
+    </div>
+  </section>
+    
+  <section id="features" class="bg-white py-16">
+    <div class="container mx-auto px-6 text-center">
+      <!-- Section Heading -->
+      <h2 class="text-4xl text-amber-700 mb-8">Our Key Features</h2>
+  
+      <!-- Features Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
+          <img src="static/images/feature-house.jpg" alt="High-Quality Properties" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl text-gray-800 mb-2">High-Quality Properties</h3>
+          <p class="text-gray-600">We provide premium properties with exceptional quality, perfect for your dream home or investment opportunities.</p>
+        </div>
+  
+        <!-- Feature 2 -->
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
+          <img src="static/images/feature-land.jpg" alt="Affordable Land" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl text-gray-800 mb-2">Affordable Land</h3>
+          <p class="text-gray-600">Our land offerings are affordable and located in prime areas, ready for development or investment.</p>
+        </div>
+  
+        <!-- Feature 3 -->
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
+          <img src="static/images/feature-transparent.jpg" alt="Transparent Process" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl text-gray-800 mb-2">Transparent Process</h3>
+          <p class="text-gray-600">We believe in complete transparency with our clients, making the buying and selling process clear and straightforward.</p>
+        </div>
+  
+        <!-- Feature 4 -->
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
+          <img src="static/images/feature-expert.jpg" alt="Expert Guidance" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl text-gray-800 mb-2">Expert Guidance</h3>
+          <p class="text-gray-600">Our team of experts offers guidance every step of the way, ensuring you make informed decisions.</p>
+        </div>
+  
+        <!-- Feature 5 -->
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
+          <img src="static/images/feature-support.jpg" alt="Customer Support" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl text-gray-800 mb-2">Customer Support</h3>
+          <p class="text-gray-600">We are committed to providing excellent customer service before, during, and after your property purchase.</p>
+        </div>
+  
+        <!-- Feature 6 -->
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
+          <img src="static/images/feature-location.jpg" alt="Prime Locations" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl text-gray-800 mb-2">Prime Locations</h3>
+          <p class="text-gray-600">Our properties are situated in highly sought-after areas, ensuring high value for your investment.</p>
+        </div>
+      </div>
+    </div>
+  </section>  
+  
+  <section id="services" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-6 text-center">
+      <!-- Section Heading -->
+      <h2 class="text-4xl text-amber-700 mb-8">Our Services</h2>
+  
+      <!-- Services Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Service 1 -->
+        <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
+          <img src="static/images/service-consulting.jpg" alt="Real Estate Investment Consulting" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl text-gray-800 mb-2">Real Estate Investment Consulting</h3>
+          <p class="text-gray-600">
+            Our expert consultants provide insights and strategies to help you maximize your real estate investment opportunities.
+          </p>
+        </div>
+  
+        <!-- Service 2 -->
+        <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
+          <img src="static/images/service-management.jpg" alt="Property Management" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl text-gray-800 mb-2">Property Management</h3>
+          <p class="text-gray-600">
+            We manage your properties with care, ensuring they remain in excellent condition and continue to provide value.
+          </p>
+        </div>
+  
+        <!-- Service 3 -->
+        <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out">
+          <img src="static/images/service-legal.jpg" alt="Legal Advisory Services" class="w-full h-48 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl text-gray-800 mb-2">Legal Advisory Services</h3>
+          <p class="text-gray-600">
+            Our legal team provides thorough advice on real estate transactions, ensuring all legal aspects are covered.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+<section id="contact" class="py-12 bg-gray-150">
+    <div class="container mx-auto text-center">
+        <h2 class="text-4xl text-amber-700 mb-4">Contact Us</h2>
+        <p class="text-lg mb-2">Which of our properties do you want to buy?
+          <br>We would love to hear from you!</p>
+        <p class="mb-2">Email us at: <a href="mailto:info@universallionized.com" class="text-blue-600">universalestate64@gmail.com</a></p>
+        <p>Phone: +2348122353207, +2348057343197
+        </p>
+    </div>
+</section>
+<section id="payment" class="py-12 bg-gray-200">
+  <div class="container mx-auto text-center">
+      <h2 class="text-4xl text-amber-700 mb-2">Payment Details</h2>
+      <p class="text-lg mb-2">All Payments should be made in favour of:</p>
+      <p class="">1864414637</p>
+      <p class="">Universal Lionized Solutions</p>
+      <p>Access Bank</p>
+  </div>
+</section>
+{% endblock %}
