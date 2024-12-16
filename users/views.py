@@ -14,6 +14,11 @@ from .forms import ProfileUpdateForm
 
 
 def home(request):
+    if request.user.is_authenticated:
+        if request.user.role == UserRole.AGENT:
+            return redirect('agent_dashboard')
+        elif request.user.role in [UserRole.ADMIN, UserRole.SUPER_ADMIN]:
+            return redirect('admin_dashboard')
     return render(request, 'home.html')
 
 
