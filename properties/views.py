@@ -30,7 +30,7 @@ def add_property(request):
                 # Save property first
                 property_instance = property_form.save()
                 
-                # Handle images with dynamic file validation
+                # Handle images
                 images = request.FILES.getlist('image')
                 for image in images:
                     # Validate image format
@@ -45,19 +45,9 @@ def add_property(request):
                             'video_form': video_form
                         })
                     
-                    # Validate file size (5MB max)
-                    if image.size > 5 * 1024 * 1024:
-                        messages.error(request, f'Image {image.name} exceeds 5MB limit')
-                        property_instance.delete()
-                        return render(request, 'add_property.html', {
-                            'property_form': property_form,
-                            'image_form': image_form,
-                            'video_form': video_form
-                        })
-                    
                     PropertyImage.objects.create(property=property_instance, image=image)
                 
-                # Handle videos with dynamic file validation
+                # Handle videos
                 videos = request.FILES.getlist('video')
                 for video in videos:
                     # Validate video format
@@ -72,26 +62,14 @@ def add_property(request):
                             'video_form': video_form
                         })
                     
-                    # Validate file size (50MB max)
-                    if video.size > 50 * 1024 * 1024:
-                        messages.error(request, f'Video {video.name} exceeds 50MB limit')
-                        property_instance.delete()
-                        return render(request, 'add_property.html', {
-                            'property_form': property_form,
-                            'image_form': image_form,
-                            'video_form': video_form
-                        })
-                    
                     PropertyVideo.objects.create(property=property_instance, video=video)
                 
                 messages.success(request, 'Property added successfully!')
                 return redirect('property_detail', pk=property_instance.pk)
             
             except Exception as e:
-                # Log the error and show a user-friendly message
                 messages.error(request, f'An error occurred: {str(e)}')
         else:
-            # If property form is invalid, show error messages
             messages.error(request, 'Please correct the errors in the form.')
     else:
         # Initialize blank forms for GET request
