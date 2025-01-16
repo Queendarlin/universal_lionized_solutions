@@ -24,7 +24,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'vercel.app',
-    'universal-lionized-solutions.vercel.app'
+    '*',
 ]
 
 
