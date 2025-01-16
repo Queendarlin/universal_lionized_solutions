@@ -62,9 +62,4 @@ module.exports = {
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),
     ],
-
-    // Output configuration
-    output: {
-        dir: '../static/css/dist',
-    }
 }
