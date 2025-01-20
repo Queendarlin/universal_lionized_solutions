@@ -12,13 +12,13 @@
     ],
     "routes": [
       {
-        "src": "/static/(.*)",
-        "dest": "static/$1"
-      },
-      {
         "src": "/(.*)",
         "dest": "universal_lionized_solutions/wsgi.py"
-      }      
+      },
+      {
+        "src": "/static/(.*)",
+        "dest": "static/$1"
+      }
     ]
   }
   
