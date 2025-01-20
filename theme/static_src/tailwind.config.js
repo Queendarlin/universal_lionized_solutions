@@ -42,12 +42,6 @@ module.exports = {
          * and make sure the pattern below matches your project structure.
          */
         '../../**/*.py',
-
-        "../universal_lionized_solutions/templates/**/*.html",
-        "../../users/templates/**/*.html",
-        "../../properties/templates/**/*.html",
-        "../../bonuses/templates/**/*.html",
-        "./templates/**/*.html",
     ],
     theme: {
         extend: {},
