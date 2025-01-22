@@ -10,7 +10,9 @@ python manage.py makemigrations
 python manage.py migrate
 
 # Tailwind setup and build
+python manage.py tailwind init
 python manage.py tailwind install
+
 python manage.py tailwind build
 
 # Collect static files
