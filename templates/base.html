@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Universal Lionized Solutions{% endblock %}</title>
     <link rel="stylesheet" href="../static/styles/main.css">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'images/site.webmanifest' %}">
     {% tailwind_css %}
 
 </head>
@@ -22,14 +27,29 @@
               </div>
 
             <!-- Navigation Links-->
-            <div class="hidden space-x-6 md:flex">
+            <!-- Navigation Links-->
+        <div class="hidden space-x-6 md:flex">
+            {% if request.path != '/property_list/' %}
                 <a href="#about" class="hover:text-amber-600">About</a>
                 <a href="#services" class="hover:text-amber-600">Services</a>
-                <a href="{% url 'property_list' %}" class="hover:text-amber-600">Properties</a>
                 <a href="#features" class="hover:text-amber-600">Features</a>
                 <a href="#payment" class="hover:text-amber-600">Payment</a>
                 <a href="#contact" class="hover:text-amber-600">Contact</a>
-            </div>
+            {% endif %}
+            <a href="{% url 'property_list' %}" class="hover:text-amber-600">Properties</a>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden flex-col space-y-4 mt-4">
+            {% if request.path != '/properties/' %}
+                <a href="#about" class="block text-center hover:text-red-400">About</a>
+                <a href="#services" class="block text-center hover:text-red-400">Services</a>
+                <a href="#features" class="block text-center hover:text-red-400">Features</a>
+                <a href="#payment" class="block text-center hover:text-red-400">Payment</a>
+                <a href="#contact" class="block text-center hover:text-red-400">Contact</a>
+            {% endif %}
+            <a href="{% url 'property_list' %}" class="block text-center hover:text-red-400">Properties</a>
+        </div>
 
             <div>
                 {% if user.is_authenticated %}
@@ -115,13 +135,6 @@
         </div>
     </footer>
 
-    <script>
-        // JavaScript function to toggle mobile menu
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../static/scripts/logout.js"></script>
     <script src="../static/scripts/main.js"></script>
