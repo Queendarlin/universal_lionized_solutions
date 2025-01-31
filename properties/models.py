@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django_resized import ResizedImageField 
 
 
 # Enumerations for PropertyType, PropertyStatus, and Currency
@@ -35,7 +36,7 @@ class Property(models.Model):
 
 class PropertyImage(models.Model):
     property = models.ForeignKey(Property, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='property_images/')
+    image = ResizedImageField(size=[600, 600], quality=85, upload_to='property_images/')
 
     def __str__(self):
         return f"Image for {self.property.title}"
