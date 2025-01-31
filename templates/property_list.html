@@ -14,9 +14,9 @@
             <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform transform hover:scale-105">
                 <!-- Dynamic image rendering: show the first image if it exists -->
                 {% if property.images.first %}
-                    <img src="{{ property.images.first.image.url }}" alt="{{ property.title }}" class="w-full h-56 object-cover">
+                    <img src="{{ property.images.first.image.url }}" alt="{{ property.title }}" class="w-full h-auto object-contain">
                 {% else %}
-                    <div class="w-full h-56 bg-gray-200 flex items-center justify-center text-gray-500">
+                    <div class="w-full h-auto bg-gray-200 flex items-center justify-center text-gray-500">
                         No Image Available
                     </div>
                 {% endif %}
