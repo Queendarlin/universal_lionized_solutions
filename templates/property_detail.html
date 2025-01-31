@@ -33,12 +33,12 @@
             <div class="lg:grid lg:grid-cols-2 lg:gap-8">
                 <!-- Images Section -->
                 <div class="lg:col-span-1">
-                        <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+                        <div class="bg-gray-200">
                             {% for image in property.images.all %}
                             <img 
                                 src="{{ image.image.url }}" 
                                 alt="Photo {{ forloop.counter }} of {{ property.title }}"
-                                class="object-cover w-full h-full transition-opacity duration-500"
+                                class="object-contain w-full h-auto transition-opacity duration-500"
                                 x-show="activeSlide === {{ forloop.counter0 }}"
                                 loading="lazy"
                             >
