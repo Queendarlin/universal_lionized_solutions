@@ -175,6 +175,9 @@ STORAGES = {
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
         },
+    "video": {
+        "BACKEND": "cloudinary_storage.storage.VideoMediaCloudinaryStorage",
+    },
 }
 
 # Cloudinary settings

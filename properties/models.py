@@ -1,7 +1,8 @@
 import uuid
 from django.db import models
 from django_resized import ResizedImageField 
-
+from cloudinary_storage.storage import VideoMediaCloudinaryStorage
+from cloudinary_storage.validators import validate_video
 
 # Enumerations for PropertyType, PropertyStatus, and Currency
 class PropertyType(models.TextChoices):
@@ -36,7 +37,7 @@ class Property(models.Model):
 
 class PropertyImage(models.Model):
     property = models.ForeignKey(Property, related_name='images', on_delete=models.CASCADE)
-    image = ResizedImageField(size=[600, 600], quality=85, upload_to='property_images/')
+    image = ResizedImageField(size=[600, 600], quality=85, upload_to='property_images/', blank=True)
 
     def __str__(self):
         return f"Image for {self.property.title}"
@@ -44,7 +45,8 @@ class PropertyImage(models.Model):
 
 class PropertyVideo(models.Model):
     property = models.ForeignKey(Property, related_name='videos', on_delete=models.CASCADE)
-    video = models.FileField(upload_to='property_videos/')
+    video = models.FileField(upload_to='property_videos/', blank=True,
+                             storage=VideoMediaCloudinaryStorage(), validators=[validate_video])
 
     def __str__(self):
         return f"Video for {self.property.title}"
